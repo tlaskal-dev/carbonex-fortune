@@ -1619,3 +1619,409 @@ footer#about > p > span {
   padding: 0;
   line-height: inherit;
 }
+/* 첫 화면의 기존 개별 캐릭터와 배경 장식 숨기기 */
+body.garden-ui.storybook-ui .character-hero > img:not(.hero-garden-art),
+body.garden-ui.storybook-ui .character-hero > svg,
+body.garden-ui.storybook-ui .character-hero > span,
+body.garden-ui.storybook-ui .character-hero::before,
+body.garden-ui.storybook-ui .character-hero::after {
+  display: none;
+}
+
+/* 새 그림의 원본 비율 유지 */
+body.garden-ui.storybook-ui .character-hero {
+  height: auto;
+  aspect-ratio: auto;
+  max-width: 540px;
+  margin: 28px auto 0;
+}
+
+body.garden-ui.storybook-ui .character-hero > img.hero-garden-art {
+  display: block;
+  position: static;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  transform: none;
+  filter: none;
+}
+
+@media (max-width: 850px) {
+  body.garden-ui.storybook-ui .character-hero {
+    max-width: 430px;
+    margin-top: 20px;
+  }
+}
+/* 새 캐릭터 그림 위에 남아 있는 기존 정원 장식 제거 */
+body.garden-ui.storybook-ui .character-hero > svg.mini-garden,
+body.garden-ui.storybook-ui .character-hero > svg.storybook-scene {
+  display: none !important;
+}
+
+/* 기존 원형 배경도 제거 */
+body.garden-ui.storybook-ui .character-hero::before,
+body.garden-ui.storybook-ui .character-hero::after {
+  content: none !important;
+  display: none !important;
+}
+/* 초록 편지 선택 화면 */
+#letterPicker {
+  width: min(720px, calc(100% - 28px));
+  max-height: calc(100dvh - 28px);
+  padding: 0;
+  border: 1px solid #dce3ce;
+  border-radius: 26px;
+  background: #faf8ef;
+  color: #35543c;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-shadow: 0 20px 80px #263c2526;
+}
+
+#letterPicker::backdrop {
+  background: #263c2570;
+  backdrop-filter: blur(5px);
+}
+
+.letter-picker-inner {
+  padding: 28px 36px 26px;
+  text-align: center;
+}
+
+.letter-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.letter-picker-header > span {
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: 2px;
+}
+
+#letterPicker .letter-back {
+  border: 0;
+  padding: 8px 0;
+  background: none;
+  color: #79876c;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.letter-eyebrow {
+  margin: 0 0 13px;
+  color: #829362;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+#letterPickerTitle {
+  margin: 0;
+  color: #35543c;
+  font-size: clamp(27px, 5vw, 38px);
+  line-height: 1.4;
+  letter-spacing: -1.3px;
+  word-break: keep-all;
+}
+
+.letter-description {
+  margin: 16px 0 0;
+  color: #7b866f;
+  font-size: 14px;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+#letterPicker .letter-friends {
+  display: block;
+  width: min(100%, 440px);
+  height: auto;
+  margin: 20px auto 24px;
+}
+
+.letter-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+#letterPicker .letter-option {
+  display: block;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #78866c;
+  font: inherit;
+  cursor: pointer;
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+#letterPicker .letter-option:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.letter-envelope {
+  position: relative;
+  display: block;
+  aspect-ratio: 1.35;
+  border: 1px solid #c9d2b6;
+  border-radius: 9px;
+  background: #f2ead5;
+  box-shadow: 0 5px 12px #52683b10;
+  perspective: 650px;
+  isolation: isolate;
+}
+
+.letter-envelope::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: #fbf6e7;
+  clip-path: polygon(0 0, 50% 53%, 100% 0, 100% 100%, 0 100%);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.letter-flap {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: #e8dfc7;
+  clip-path: polygon(0 0, 100% 0, 50% 59%);
+  transform-origin: center top;
+  transition: transform .65s ease;
+  backface-visibility: hidden;
+}
+
+.letter-paper {
+  position: absolute;
+  inset: 12% 10% 8%;
+  z-index: 2;
+  border: 1px solid #e2e5d6;
+  border-radius: 5px;
+  background:
+    linear-gradient(#dce5cb, #dce5cb) center 24% / 55% 2px no-repeat,
+    linear-gradient(#e7eadc, #e7eadc) center 40% / 65% 2px no-repeat,
+    #fffdf6;
+  transition: transform .7s ease .15s;
+}
+
+.letter-seal {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  border: 1px solid #a7b98c;
+  border-radius: 50%;
+  background: #e4edcf;
+  color: #647d49;
+  font-size: 10px;
+  letter-spacing: 1px;
+  transform: translate(-50%, -50%);
+  transition: opacity .2s ease;
+}
+
+.letter-number {
+  display: block;
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+@media (hover: hover) {
+  #letterPicker .letter-option:not(:disabled):hover {
+    transform: translateY(-7px);
+  }
+}
+
+#letterPicker .letter-option:focus-visible {
+  outline: 2px solid #68854e;
+  outline-offset: 7px;
+  border-radius: 9px;
+}
+
+#letterPicker .letter-option.is-selected {
+  transform: translateY(-8px);
+}
+
+.letter-option.is-selected .letter-envelope {
+  outline: 2px solid #7b975b;
+  outline-offset: 3px;
+}
+
+#letterPicker .letter-option.is-muted {
+  opacity: .35;
+}
+
+.letter-option.is-selected .letter-flap {
+  transform: rotateX(180deg);
+}
+
+.letter-option.is-selected .letter-paper {
+  transform: translateY(-28%);
+}
+
+.letter-option.is-selected .letter-seal {
+  opacity: 0;
+}
+
+.letter-status {
+  min-height: 24px;
+  margin: 28px 0 10px;
+  color: #526e44;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.letter-footnote {
+  margin: 0;
+  color: #929a85;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .letter-picker-inner {
+    padding: 22px 18px;
+  }
+
+  .letter-picker-header {
+    margin-bottom: 24px;
+  }
+
+  .letter-options {
+    gap: 12px;
+  }
+
+  .letter-description {
+    font-size: 12px;
+  }
+
+  .letter-seal {
+    width: 24px;
+    height: 24px;
+    font-size: 9px;
+  }
+
+  .letter-number {
+    font-size: 10px;
+  }
+
+  .letter-status {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #letterPicker .letter-option,
+  #letterPicker .letter-flap,
+  #letterPicker .letter-paper,
+  #letterPicker .letter-seal {
+    transition: none;
+  }
+}
+/* 은은한 종이 질감 */
+#letterPicker .letter-envelope {
+  --paper-grain:
+    repeating-linear-gradient(
+      14deg,
+      rgba(115, 92, 53, .035) 0,
+      rgba(115, 92, 53, .035) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      103deg,
+      rgba(255, 255, 255, .3) 0,
+      rgba(255, 255, 255, .3) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+
+  border-color: #d5cbb4;
+  border-radius: 7px;
+  background-color: #eee3ca;
+  background-image: var(--paper-grain);
+  box-shadow:
+    0 5px 10px rgba(89, 76, 46, .09),
+    inset 0 0 16px rgba(139, 116, 74, .06);
+}
+
+/* 봉투 앞면 */
+#letterPicker .letter-envelope::after {
+  border-radius: 6px;
+  background-color: #f8f0dd;
+  background-image:
+    var(--paper-grain),
+    linear-gradient(
+      150deg,
+      rgba(255, 255, 255, .35),
+      transparent 55%,
+      rgba(157, 132, 84, .06)
+    );
+}
+
+/* 접힌 덮개 */
+#letterPicker .letter-flap {
+  background-color: #eee4ce;
+  background-image:
+    var(--paper-grain),
+    linear-gradient(
+      to bottom,
+      #faf4e5,
+      #e6d8ba
+    );
+}
+
+/* 안쪽 편지지 */
+#letterPicker .letter-paper {
+  background-color: #fffaf0;
+  box-shadow: 0 1px 5px rgba(89, 76, 46, .06);
+}
+
+/* 숫자 원형 봉인 대신 식물 그림 */
+#letterPicker .letter-seal {
+  top: 48%;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  filter: drop-shadow(0 2px 1px rgba(80, 92, 56, .13));
+}
+
+#letterPicker .letter-seal svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* 선택한 봉투도 부드러운 초록 테두리로 */
+#letterPicker .letter-option.is-selected .letter-envelope {
+  outline-color: #8ba16a;
+}
+
+@media (max-width: 600px) {
+  #letterPicker .letter-seal {
+    width: 34px;
+    height: 34px;
+  }
+}

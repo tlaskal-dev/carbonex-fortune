@@ -2453,3 +2453,286 @@ print(
 
   updateLuckyColor();
 })();
+/* 첫 화면 캐릭터를 정원 그림으로 교체 */
+(() => {
+  const hero = document.querySelector(".character-hero");
+  if (!hero || hero.querySelector(".hero-garden-art")) return;
+
+  const image = document.createElement("img");
+  image.className = "hero-garden-art";
+  image.src = "./assets/hero-garden.png";
+  image.alt = "식물 사이에 함께 모인 카보, 넥시, 리박사";
+
+  hero.appendChild(image);
+})();
+/* 오늘의 초록 편지: 봉투 선택 단계 */
+(() => {
+  const form = document.querySelector("#fortuneForm");
+  if (!form || document.querySelector("#letterPicker")) return;
+
+  let allowResult = false;
+  let opening = false;
+  let openingTimer = null;
+
+  const picker = document.createElement("dialog");
+  picker.id = "letterPicker";
+  picker.setAttribute("aria-labelledby", "letterPickerTitle");
+
+  picker.innerHTML = `
+    <div class="letter-picker-inner">
+      <div class="letter-picker-header">
+        <span>CARBONEX</span>
+        <button type="button" class="letter-back">
+          ← 돌아가기
+        </button>
+      </div>
+
+      <p class="letter-eyebrow">오늘의 초록 편지</p>
+
+      <h2 id="letterPickerTitle" tabindex="-1">
+        당신에게 도착한<br>
+        행운을 골라보세요.
+      </h2>
+
+      <p class="letter-description">
+        마음이 끌리는 봉투 한 장을 선택해주세요.
+      </p>
+
+      <img
+        class="letter-friends"
+        src="./assets/hero-garden.png"
+        alt="초록 편지를 전하는 카보, 넥시, 리박사"
+      >
+
+      <div class="letter-options" aria-label="행운의 편지 선택">
+        <button
+          type="button"
+          class="letter-option"
+          aria-label="첫 번째 행운의 편지 열기"
+        >
+          <span class="letter-envelope" aria-hidden="true">
+            <span class="letter-paper"></span>
+            <span class="letter-flap"></span>
+            <span class="letter-seal">01</span>
+          </span>
+          <span class="letter-number">첫 번째 편지</span>
+        </button>
+
+        <button
+          type="button"
+          class="letter-option"
+          aria-label="두 번째 행운의 편지 열기"
+        >
+          <span class="letter-envelope" aria-hidden="true">
+            <span class="letter-paper"></span>
+            <span class="letter-flap"></span>
+            <span class="letter-seal">02</span>
+          </span>
+          <span class="letter-number">두 번째 편지</span>
+        </button>
+
+        <button
+          type="button"
+          class="letter-option"
+          aria-label="세 번째 행운의 편지 열기"
+        >
+          <span class="letter-envelope" aria-hidden="true">
+            <span class="letter-paper"></span>
+            <span class="letter-flap"></span>
+            <span class="letter-seal">03</span>
+          </span>
+          <span class="letter-number">세 번째 편지</span>
+        </button>
+      </div>
+
+      <p class="letter-status" role="status" aria-live="polite">
+        오늘 나에게 도착한 한 장의 편지
+      </p>
+
+      <p class="letter-footnote">
+        같은 정보라면 오늘의 운세는 같아요.
+      </p>
+    </div>
+  `;
+
+  document.body.appendChild(picker);
+
+  const options = [...picker.querySelectorAll(".letter-option")];
+  const backButton = picker.querySelector(".letter-back");
+  const status = picker.querySelector(".letter-status");
+
+  function resetPicker() {
+    clearTimeout(openingTimer);
+    openingTimer = null;
+    opening = false;
+
+    picker.classList.remove("is-opening");
+    backButton.disabled = false;
+    status.textContent = "오늘 나에게 도착한 한 장의 편지";
+
+    options.forEach(button => {
+      button.disabled = false;
+      button.classList.remove("is-selected", "is-muted");
+    });
+  }
+
+  backButton.addEventListener("click", () => picker.close());
+
+  // Esc 키나 돌아가기로 닫으면 운세 조회를 기록하지 않음
+  picker.addEventListener("close", resetPicker);
+
+  /*
+   * 기존 운세 생성 코드보다 먼저 봉투 선택 화면을 표시.
+   * 봉투 선택이 끝나면 기존 제출 흐름을 한 번 실행.
+   */
+  form.addEventListener("submit", event => {
+    if (allowResult) return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    if (!form.reportValidity()) return;
+
+    const yearValue = form.querySelector("#year")?.value;
+    const monthValue = form.querySelector("#month")?.value;
+    const dayValue = form.querySelector("#day")?.value;
+
+    if (!yearValue || !monthValue || !dayValue) {
+      alert("태어난 날짜를 선택해 주세요.");
+      return;
+    }
+
+    const birth = [
+      yearValue,
+      monthValue.padStart(2, "0"),
+      dayValue.padStart(2, "0")
+    ].join("-");
+
+    if (birth > koreaDate()) {
+      alert("태어난 날짜를 다시 확인해 주세요.");
+      return;
+    }
+
+    if (picker.open) return;
+
+    resetPicker();
+    picker.showModal();
+    picker.querySelector("#letterPickerTitle").focus();
+  }, true);
+
+  options.forEach(selected => {
+    selected.addEventListener("click", () => {
+      if (opening) return;
+      opening = true;
+
+      picker.classList.add("is-opening");
+      backButton.disabled = true;
+
+      options.forEach(button => {
+        button.disabled = true;
+        button.classList.toggle("is-selected", button === selected);
+        button.classList.toggle("is-muted", button !== selected);
+      });
+
+      status.textContent = "이 편지에 담긴 오늘의 초록운은…";
+
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      openingTimer = setTimeout(() => {
+        openingTimer = null;
+        picker.close();
+
+        allowResult = true;
+
+        try {
+          // 기존 운세 생성과 DB 조회 기록을 여기서 실행
+          form.requestSubmit();
+        } finally {
+          allowResult = false;
+        }
+      }, reduceMotion ? 150 : 1000);
+    });
+  });
+})();
+/* 봉투 봉인을 풀잎·새싹·꽃으로 변경 */
+(() => {
+  const seals = document.querySelectorAll(
+    "#letterPicker .letter-seal"
+  );
+
+  const botanicalMarks = [
+    // 풀잎
+    `
+      <path
+        d="M12 34C9 18 18 7 34 7C35 23 26 33 12 34Z"
+        fill="#9DB576" stroke="#617C49" stroke-width="1.4"
+      />
+      <path
+        d="M9 38L28 15M17 29L17 21M22 24L29 23"
+        fill="none" stroke="#617C49" stroke-width="1.5"
+        stroke-linecap="round"
+      />
+    `,
+
+    // 새싹
+    `
+      <path
+        d="M23 38V23"
+        fill="none" stroke="#64804D" stroke-width="2"
+        stroke-linecap="round"
+      />
+      <path
+        d="M23 27C12 28 7 21 8 13C18 12 24 18 23 27Z"
+        fill="#AEC58B" stroke="#718D55" stroke-width="1.2"
+      />
+      <path
+        d="M23 23C22 12 29 6 39 7C40 17 34 24 23 23Z"
+        fill="#90AD6B" stroke="#64804D" stroke-width="1.2"
+      />
+      <path
+        d="M14 19L23 27L33 13"
+        fill="none" stroke="#718D55" stroke-width="1"
+        stroke-linecap="round"
+      />
+    `,
+
+    // 꽃
+    `
+      <path
+        d="M24 27V40"
+        fill="none" stroke="#849B68" stroke-width="1.8"
+        stroke-linecap="round"
+      />
+      <path
+        d="M24 36Q12 37 13 29Q22 28 24 36"
+        fill="#A6BA83"
+      />
+      <g fill="#FFFCED" stroke="#CDBF94" stroke-width="1">
+        <ellipse cx="24" cy="12" rx="5" ry="8"/>
+        <ellipse cx="33" cy="18" rx="8" ry="5"
+          transform="rotate(-25 33 18)"/>
+        <ellipse cx="30" cy="28" rx="5" ry="8"
+          transform="rotate(-30 30 28)"/>
+        <ellipse cx="18" cy="28" rx="5" ry="8"
+          transform="rotate(30 18 28)"/>
+        <ellipse cx="15" cy="18" rx="8" ry="5"
+          transform="rotate(25 15 18)"/>
+      </g>
+      <circle cx="24" cy="21" r="5" fill="#DDBB62"/>
+    `
+  ];
+
+  seals.forEach((seal, index) => {
+    seal.innerHTML = `
+      <svg
+        viewBox="0 0 48 48"
+        aria-hidden="true"
+        focusable="false"
+      >
+        ${botanicalMarks[index % botanicalMarks.length]}
+      </svg>
+    `;
+  });
+})();
