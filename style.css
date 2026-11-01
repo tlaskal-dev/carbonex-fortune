@@ -551,3 +551,1059 @@ summary {
     margin-top: 12px;
   }
 }
+/* ==============================
+   초록 정원 디자인
+   기존 style.css 맨 아래에 추가
+============================== */
+
+/* 전체 색감 */
+
+body.garden-ui {
+  --green: #35543c;
+  --line: #dce3ce;
+
+  color: #35543c;
+  background-color: #f5f5e9;
+
+  background-image:
+    radial-gradient(
+      ellipse at 4% 28%,
+      #e0e9c8 0,
+      transparent 43%
+    ),
+    radial-gradient(
+      ellipse at 96% 80%,
+      #e9edce 0,
+      transparent 42%
+    );
+}
+
+/* 상단 */
+
+.garden-ui header {
+  max-width: 1160px;
+  padding: 24px 4%;
+  border: 0;
+}
+
+.garden-ui .brand {
+  font-size: 16px;
+  letter-spacing: 1.5px;
+}
+
+.garden-ui .brand span {
+  color: #6c8654;
+}
+
+.garden-ui .edition {
+  color: #929c7f;
+  font-size: 10px;
+}
+
+.garden-ui .aboutlink {
+  color: #728366;
+  font-size: 11px;
+}
+
+/* 첫 화면 배치 */
+
+.garden-ui main {
+  max-width: 1120px;
+  grid-template-columns: 1fr 440px;
+  gap: 65px;
+  padding: 40px 4% 70px;
+  align-items: center;
+}
+
+.garden-ui .intro {
+  min-height: 0;
+}
+
+.garden-ui .intro > .eyebrow {
+  width: fit-content;
+  font-size: 11px;
+  color: #78885f;
+
+  background: #edf1dc;
+  border: 1px solid #dce5c8;
+  border-radius: 30px;
+
+  padding: 9px 13px;
+}
+
+.garden-ui h1 {
+  font-size: clamp(38px, 4.3vw, 56px);
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: -2.8px;
+
+  margin: 24px 0 18px;
+  word-break: keep-all;
+}
+
+.garden-ui h1 em {
+  color: #799452;
+}
+
+.garden-ui h1 em::after {
+  background: #d2dfa9;
+  height: 6px;
+}
+
+.garden-ui .intro > p {
+  color: #849071;
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* 캐릭터 정원 */
+
+.garden-ui .character-hero {
+  height: 270px;
+  max-width: 410px;
+  margin-top: 15px;
+}
+
+.garden-ui .character-hero::before {
+  background: #e1eac7;
+  inset: 30px 18px 32px;
+}
+
+.garden-ui .character-hero img:nth-child(1) {
+  width: 46%;
+  height: 175px;
+  left: 25%;
+  top: 33px;
+}
+
+.garden-ui .character-hero img:nth-child(2) {
+  width: 31%;
+  height: 135px;
+  left: 0;
+  top: 110px;
+}
+
+.garden-ui .character-hero img:nth-child(3) {
+  width: 31%;
+  height: 138px;
+  right: 0;
+  top: 105px;
+}
+
+.garden-ui .character-hero span {
+  color: #8b977a;
+  font-size: 10px;
+}
+
+.garden-ui .introfoot {
+  margin-top: 22px;
+  padding-top: 17px;
+  color: #8b967c;
+}
+
+/* 종이 느낌의 입력 카드 */
+
+.garden-ui .workspace {
+  position: relative;
+  padding: 32px;
+
+  border: 1px solid #e1e4d4;
+  border-radius: 24px;
+
+  background: #fffdf5;
+  box-shadow: 0 18px 50px #62734b0a;
+}
+
+.garden-ui .workspace::before {
+  content: "";
+  display: block;
+
+  width: 48px;
+  height: 5px;
+
+  background: #d9e3b5;
+  border-radius: 10px;
+
+  margin: -13px auto 25px;
+}
+
+.garden-ui .step {
+  color: #96a17c;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+
+.garden-ui #inputPanel > h2 {
+  font-size: 23px;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.garden-ui .sub {
+  line-height: 1.9;
+  color: #8b947e;
+}
+
+.garden-ui .segmented {
+  background: #f1f3e6;
+  padding: 5px;
+  border-radius: 13px;
+}
+
+.garden-ui .segmented span {
+  border-radius: 9px;
+}
+
+.garden-ui select {
+  min-height: 49px;
+  border-radius: 11px;
+  background-color: #fffef9;
+}
+
+.garden-ui select:disabled {
+  background: #f5f6ee;
+}
+
+/* 버튼과 안내 */
+
+.garden-ui .primary {
+  min-height: 54px;
+  border-radius: 13px;
+
+  background: #63804d;
+  color: #fffef5;
+
+  box-shadow: 0 5px 12px #63804d12;
+}
+
+.garden-ui .primary:hover {
+  background: #4d6c3b;
+}
+
+.garden-ui .privacy {
+  font-size: 9px;
+  color: #969e87;
+  line-height: 1.9;
+}
+
+.garden-ui .previewnote {
+  color: #8a957b;
+  font-size: 10px;
+}
+
+.garden-ui .fine {
+  font-size: 10px;
+  color: #929d83;
+  line-height: 1.9;
+}
+
+.garden-ui footer {
+  max-width: 1080px;
+  font-size: 10px;
+}
+
+/* 결과 화면: 소개를 접고 카드 중앙 배치 */
+
+.garden-ui.has-result .intro {
+  display: none;
+}
+
+.garden-ui.has-result main {
+  display: block;
+  max-width: 730px;
+  padding-top: 18px;
+}
+
+.garden-ui.has-result .workspace {
+  padding: 30px 40px 26px;
+}
+
+.garden-back {
+  background: transparent;
+  border: 0;
+  color: #839174;
+
+  cursor: pointer;
+  padding: 4px 0 17px;
+  font-size: 11px;
+}
+
+.garden-ui #resultPanel > .step {
+  border-bottom: 1px solid #e7eadb;
+  padding: 0 0 14px;
+  margin-bottom: 29px;
+}
+
+/* 총운 */
+
+.garden-ui #resultCard > .eyebrow {
+  font-size: 10px;
+  color: #9ba77e;
+}
+
+.garden-ui #fortuneTitle {
+  font-size: 29px;
+  font-weight: 800;
+  line-height: 1.5;
+
+  color: #42613e;
+  margin: 15px 0 22px;
+  letter-spacing: -1px;
+
+  word-break: keep-all;
+}
+
+.garden-ui #fortuneTitle:focus {
+  outline: none;
+}
+
+.garden-ui #fortuneBody {
+  font-size: 14px;
+  line-height: 2;
+  color: #7a866f;
+
+  margin: 0 0 25px;
+}
+
+.garden-ui .luckrow {
+  background: #f3f4e8;
+  border: 1px solid #e8ebd8;
+  border-radius: 15px;
+
+  padding: 15px;
+  margin: 25px 0 30px;
+}
+
+.garden-ui .luckrow b {
+  color: #6c8255;
+}
+
+/* 환경 실천 카드 */
+
+.garden-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #768d5b;
+
+  margin: 0 0 17px;
+  line-height: 1.7;
+}
+
+.garden-eco-card {
+  background: #edf3df;
+  border: 1px solid #dce7c9;
+  border-radius: 20px;
+
+  padding: 23px;
+  margin-bottom: 30px;
+}
+
+.garden-ui .missionbox {
+  background: transparent;
+  border: 0;
+
+  padding: 0 0 19px;
+  border-radius: 0;
+  min-height: 0;
+}
+
+.garden-ui .missionbox small {
+  color: #93a17e;
+  font-size: 9px;
+}
+
+.garden-ui .missionbox h3 {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 8px 0;
+}
+
+.garden-ui .missionbox p {
+  font-size: 12px;
+  color: #849174;
+}
+
+.garden-ui .itembox {
+  border-top: 1px dashed #d1ddbd;
+  padding: 19px 0 0;
+  gap: 14px;
+}
+
+.garden-ui .itembox > span {
+  background: #fffdf3;
+  border-radius: 14px;
+
+  width: 53px;
+  min-width: 53px;
+  height: 53px;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 25px;
+}
+
+.garden-ui .itembox small {
+  color: #93a17e;
+  font-size: 9px;
+}
+
+.garden-ui .itembox h3 {
+  font-size: 15px;
+  margin: 5px 0;
+}
+
+.garden-ui .itembox p {
+  font-size: 11px;
+  color: #849174;
+}
+
+/* 카테고리별 펼침 카드 */
+
+.garden-ui #detailFortune {
+  border: 0;
+  padding: 0;
+  margin: 0 0 27px;
+}
+
+.garden-ui #detailList > section {
+  border: 0;
+  padding: 0;
+  margin-bottom: 9px;
+}
+
+.garden-ui #detailList details {
+  border: 1px solid #e3e8d6;
+  border-radius: 13px;
+
+  background: #fffef9;
+  overflow: hidden;
+}
+
+.garden-ui #detailList summary {
+  position: relative;
+  padding: 15px 40px 15px 17px;
+
+  list-style: none;
+  font-size: 13px;
+  color: #69805a;
+}
+
+.garden-ui #detailList summary::-webkit-details-marker {
+  display: none;
+}
+
+.garden-ui #detailList summary::after {
+  content: "+";
+
+  position: absolute;
+  right: 18px;
+  top: 14px;
+
+  color: #9cae84;
+  font-size: 17px;
+}
+
+.garden-ui #detailList details[open] summary::after {
+  content: "−";
+}
+
+.garden-ui #detailList details[open] summary {
+  background: #f5f7ed;
+}
+
+.garden-ui #detailList p {
+  padding: 15px 17px 18px;
+  color: #7d8972;
+
+  font-size: 12px;
+  line-height: 1.95;
+}
+
+/* 하단 */
+
+.garden-ui .actions button {
+  background: #fffef9;
+  border-color: #dce5ce;
+  border-radius: 12px;
+
+  padding: 15px 8px;
+}
+
+.garden-ui .textbutton {
+  color: #929e82;
+  margin-top: 16px;
+}
+
+.garden-ui .green-dialog {
+  background: #fffdf5;
+}
+
+/* 모바일 */
+
+@media (max-width: 850px) {
+  .garden-ui header {
+    padding: 18px 6%;
+  }
+
+  .garden-ui .edition {
+    display: none;
+  }
+
+  .garden-ui main {
+    display: block;
+    padding: 22px 6% 40px;
+  }
+
+  .garden-ui .intro {
+    text-align: center;
+  }
+
+  .garden-ui .intro > .eyebrow {
+    margin: 0 auto;
+    font-size: 10px;
+  }
+
+  .garden-ui h1 {
+    font-size: 39px;
+    letter-spacing: -2px;
+    margin: 20px 0 12px;
+  }
+
+  .garden-ui .intro > p {
+    font-size: 12px;
+    line-height: 1.9;
+  }
+
+  .garden-ui .character-hero {
+    height: 228px;
+    max-width: 340px;
+    margin-top: 8px;
+  }
+
+  .garden-ui .character-hero img:nth-child(1) {
+    height: 151px;
+    top: 25px;
+  }
+
+  .garden-ui .character-hero img:nth-child(2) {
+    height: 113px;
+    top: 91px;
+  }
+
+  .garden-ui .character-hero img:nth-child(3) {
+    height: 116px;
+    top: 86px;
+  }
+
+  .garden-ui .introfoot {
+    margin-bottom: 25px;
+    font-size: 9px;
+  }
+
+  .garden-ui .workspace {
+    padding: 28px 23px;
+  }
+
+  .garden-ui.has-result main {
+    padding-top: 12px;
+  }
+
+  .garden-ui.has-result .workspace {
+    padding: 25px 23px;
+  }
+
+  .garden-ui #fortuneTitle {
+    font-size: 25px;
+  }
+
+  .garden-ui #fortuneBody {
+    font-size: 13px;
+    line-height: 1.95;
+  }
+
+  .garden-eco-card {
+    padding: 19px;
+  }
+
+  .garden-ui .missionbox h3 {
+    font-size: 16px;
+  }
+
+  .garden-ui footer {
+    margin: 0 6%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .garden-ui *,
+  .garden-ui *::before,
+  .garden-ui *::after {
+    scroll-behavior: auto !important;
+  }
+}
+/* =================================
+   그림책 정원
+   style.css 맨 아래에 추가
+================================= */
+
+body.storybook-ui:not(.has-result) {
+  background-color: #f6f4e8;
+
+  background-image: radial-gradient(
+    ellipse at 15% 25%,
+    #e5eccd 0,
+    transparent 52%
+  );
+}
+
+/* 제목 크기를 조금 줄여 정원 공간 확보 */
+
+.garden-ui.storybook-ui h1 {
+  font-size: clamp(35px, 3.8vw, 49px);
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+
+.garden-ui.storybook-ui .intro > p {
+  font-size: 13px;
+}
+
+/* 정원 풍경 */
+
+.garden-ui.storybook-ui .character-hero {
+  width: 100%;
+  max-width: 540px;
+
+  height: auto;
+  aspect-ratio: 540 / 400;
+
+  margin: 6px auto 0;
+
+  position: relative;
+  display: block;
+  isolation: isolate;
+}
+
+/* 기존 타원 배경 제거 */
+
+.garden-ui.storybook-ui .character-hero::before,
+.garden-ui.storybook-ui .character-hero::after {
+  display: none;
+}
+
+.storybook-scene {
+  display: block;
+  position: absolute;
+
+  inset: 0 0 auto;
+  width: 100%;
+  height: auto;
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 풍경 안에 캐릭터 배치 */
+
+.garden-ui.storybook-ui .character-hero > img[alt] {
+  position: absolute;
+  object-fit: contain;
+  max-width: none;
+
+  transform: none;
+
+  filter: drop-shadow(
+    0 5px 3px #5e71341c
+  );
+}
+
+.garden-ui.storybook-ui
+.character-hero > img[alt="카보"] {
+  width: 33%;
+  height: 39%;
+
+  left: 32%;
+  right: auto;
+  top: 29%;
+
+  z-index: 3;
+}
+
+.garden-ui.storybook-ui
+.character-hero > img[alt="넥시"] {
+  width: 24%;
+  height: 30%;
+
+  left: 13%;
+  right: auto;
+  top: 43%;
+
+  z-index: 4;
+}
+
+.garden-ui.storybook-ui
+.character-hero > img[alt="리박사"] {
+  width: 23%;
+  height: 31%;
+
+  left: 62%;
+  right: auto;
+  top: 38%;
+
+  z-index: 2;
+}
+
+.garden-ui.storybook-ui .character-hero > span {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  top: auto;
+  bottom: 0;
+
+  text-align: center;
+  color: #8b9776;
+
+  font-size: 9px;
+  letter-spacing: 0;
+  line-height: 1.7;
+}
+
+.garden-ui.storybook-ui .introfoot {
+  margin-top: 15px;
+}
+
+/* 종이 카드와 새싹 장식 */
+
+.garden-ui.storybook-ui .workspace {
+  border-color: #dddcc9;
+  background: #fffdf3;
+
+  box-shadow: 0 13px 40px #7e89600c;
+}
+
+.garden-ui.storybook-ui .workspace::before {
+  width: 36px;
+  height: 16px;
+
+  background: #c7d5a3;
+
+  border-radius: 0 100% 0 100%;
+  transform: rotate(-20deg);
+
+  margin-top: -13px;
+  margin-bottom: 19px;
+}
+
+/* 오늘의 초록 씨앗 */
+
+.daily-seed {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+  padding: 11px 14px;
+  margin: 0 0 17px;
+
+  background: #f5f6e9;
+  border: 1px dashed #dce5c8;
+  border-radius: 15px;
+}
+
+.daily-seed > svg {
+  width: 74px;
+  height: 74px;
+  flex: 0 0 74px;
+}
+
+.daily-seed small {
+  font-size: 10px;
+  color: #99a580;
+}
+
+.daily-seed .seed-message {
+  color: #7b8e65;
+  font-size: 12px;
+  line-height: 1.8;
+
+  margin: 5px 0 0;
+  word-break: keep-all;
+}
+
+.daily-seed .sprout-mark {
+  opacity: 0;
+
+  transform: translateY(12px) scale(0.65);
+  transform-box: fill-box;
+  transform-origin: center bottom;
+
+  transition:
+    opacity 0.5s,
+    transform 0.7s ease;
+}
+
+.daily-seed.grown .sprout-mark {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.daily-seed.grown .seed-mark {
+  opacity: 0;
+}
+
+.daily-seed.grown {
+  background: #edf4df;
+  border-color: #cbdcb3;
+}
+
+/* 모바일 */
+
+@media (max-width: 850px) {
+  .garden-ui.storybook-ui h1 {
+    font-size: 35px;
+  }
+
+  .garden-ui.storybook-ui .character-hero {
+    max-width: 430px;
+    height: auto;
+    margin-top: 6px;
+  }
+
+  .garden-ui.storybook-ui .introfoot {
+    margin-top: 12px;
+  }
+
+  .garden-ui.storybook-ui .intro > p {
+    font-size: 12px;
+  }
+
+  .daily-seed {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .daily-seed > svg {
+    width: 60px;
+    height: 60px;
+    flex-basis: 60px;
+  }
+
+  .daily-seed .seed-message {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .daily-seed .sprout-mark {
+    transition: none;
+  }
+}
+/* 첫 화면: 카보넥스의 작은 정원 */
+body.garden-ui.storybook-ui .character-hero {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  aspect-ratio: 540 / 340;
+  margin: 28px auto 0;
+  overflow: visible;
+  background: none;
+}
+
+/* 기존의 큰 풍경 그림 숨기기 */
+body.garden-ui.storybook-ui .character-hero .storybook-scene {
+  display: none;
+}
+
+/* 캐릭터 뒤의 은은한 햇살 */
+body.garden-ui.storybook-ui .character-hero::before {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 7% 9% 17%;
+  z-index: 0;
+  border: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(244, 224, 151, 0.28) 0%,
+    rgba(228, 236, 197, 0.22) 48%,
+    transparent 73%
+  );
+  transform: none;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+/* 세 친구가 함께 서 있는 작은 잔디 */
+body.garden-ui.storybook-ui .character-hero::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 16%;
+  height: 21%;
+  z-index: 1;
+  border: 0;
+  border-radius: 47% 53% 48% 52%;
+  background:
+    radial-gradient(
+      ellipse at 50% 42%,
+      rgba(151, 173, 100, 0.32),
+      rgba(187, 203, 143, 0.22) 55%,
+      transparent 75%
+    );
+  transform: rotate(-2deg);
+  box-shadow: none;
+  pointer-events: none;
+}
+
+/* 공통: 캐릭터 원본의 비율 유지 */
+body.garden-ui.storybook-ui .character-hero img {
+  position: absolute;
+  display: block;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+  margin: 0;
+  border: 0;
+  background: none;
+  transform: none;
+  filter: drop-shadow(0 7px 5px rgba(64, 81, 43, 0.09));
+}
+
+/* 카보: 가운데에서 살짝 뒤쪽 */
+body.garden-ui.storybook-ui .character-hero img[alt="카보"] {
+  width: 40%;
+  height: auto;
+  left: 30%;
+  top: auto;
+  bottom: 25%;
+  z-index: 2;
+  transform: rotate(-3deg);
+}
+
+/* 넥시: 왼쪽 앞에서 카보 쪽으로 */
+body.garden-ui.storybook-ui .character-hero img[alt="넥시"] {
+  width: 27%;
+  height: auto;
+  left: 10%;
+  top: auto;
+  bottom: 18%;
+  z-index: 3;
+  transform: rotate(-7deg);
+}
+
+/* 리박사: 오른쪽에 조금 떨어져서 */
+body.garden-ui.storybook-ui .character-hero img[alt="리박사"] {
+  width: 26%;
+  height: auto;
+  left: auto;
+  right: 10%;
+  top: auto;
+  bottom: 20%;
+  z-index: 3;
+  transform: rotate(6deg);
+}
+
+/* 아래 문구 */
+body.garden-ui.storybook-ui .character-hero > span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  margin: 0;
+  padding: 0 12px;
+  color: #7b876b;
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: center;
+  background: none;
+  transform: none;
+}
+
+@media (max-width: 600px) {
+  body.garden-ui.storybook-ui .character-hero {
+    max-width: 410px;
+    margin-top: 20px;
+  }
+
+  body.garden-ui.storybook-ui .character-hero > span {
+    font-size: 12px;
+  }
+}
+/* 떠 있는 잔디를 캐릭터 발밑으로 이동 */
+body.garden-ui.storybook-ui .character-hero::after {
+  top: auto;
+  bottom: 17%;
+  left: 8%;
+  right: 8%;
+  height: 15%;
+  background: radial-gradient(
+    ellipse,
+    rgba(151, 173, 100, 0.25) 0%,
+    rgba(187, 203, 143, 0.14) 50%,
+    transparent 73%
+  );
+}
+
+/* 리박사에게 남아 있는 기존 왼쪽 위치값 해제 */
+body.garden-ui.storybook-ui .character-hero img[alt="리박사"] {
+  left: auto;
+  right: 10%;
+}
+/* 작은 정원: 이전 배경 장식 초기화 */
+body.garden-ui.storybook-ui .character-hero::after {
+  display: none;
+}
+
+body.garden-ui.storybook-ui .character-hero {
+  aspect-ratio: 540 / 340;
+}
+
+/* 정원은 캐릭터 뒤에, 문구 위에 배치 */
+body.garden-ui.storybook-ui .character-hero > .mini-garden {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* 이전 위치값이 남지 않도록 네 방향 모두 지정 */
+body.garden-ui.storybook-ui .character-hero img[alt="카보"] {
+  width: 40%;
+  height: auto;
+  inset: auto auto 25% 30%;
+  z-index: 2;
+  transform: rotate(-3deg);
+}
+
+body.garden-ui.storybook-ui .character-hero img[alt="넥시"] {
+  width: 27%;
+  height: auto;
+  inset: auto auto 18% 10%;
+  z-index: 3;
+  transform: rotate(-5deg);
+}
+
+body.garden-ui.storybook-ui .character-hero img[alt="리박사"] {
+  width: 26%;
+  height: auto;
+  inset: auto 10% 20% auto;
+  z-index: 3;
+  transform: rotate(4deg);
+}
+
+body.garden-ui.storybook-ui .character-hero > span {
+  z-index: 4;
+}
