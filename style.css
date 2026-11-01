@@ -1607,3 +1607,15 @@ body.garden-ui.storybook-ui .character-hero img[alt="리박사"] {
 body.garden-ui.storybook-ui .character-hero > span {
   z-index: 4;
 }
+/* 상단 로고와 하단 문구 옆 이모지 제거 */
+header .brand > span,
+footer#about > p > span {
+  display: none;
+}
+/* 행운의 색 이름과 안내 문구 높이 맞추기 */
+.luckrow #color {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+}

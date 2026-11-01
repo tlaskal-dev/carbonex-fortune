@@ -945,7 +945,7 @@ $("#share").onclick = () => {
   }
 
   note.textContent =
-    "친구도 자신의 오늘 운세를 볼 수 있는 사이트 링크예요. 생년월일이나 개인 결과는 포함하지 않아요.";
+    "친구에게 오늘의 초록운을 전달해주세요!🌿";
 
   const input = document.createElement("input");
 
@@ -982,7 +982,7 @@ $("#share").onclick = () => {
     const share = document.createElement("button");
 
     share.className = "secondary-share";
-    share.textContent = "휴대폰 공유 메뉴 열기";
+    share.textContent = "공유 메뉴 열기";
 
     share.onclick = async () => {
       try {
@@ -2198,18 +2198,51 @@ $("#share").onclick = () => {
       sprout(165, characterTop + 175, 0.65);
       sprout(735, characterTop + 175, 0.65);
 
-      // 今日の気運と色
-      box(78, chipTop, 364, 52, 24, "#eaf0da");
-      box(458, chipTop, 364, 52, 24, "#eef0df");
+      // 오늘의 기운 박스
+    box(78, chipTop, 364, 52, 24, "#eaf0da");
 
-      print(
-        `오늘의 기운 · ${current.fortune[2]}`,
-        260, chipTop + 15, 19, green
-      );
-      print(
-        `행운의 색 · ${current.fortune[3]}`,
-        640, chipTop + 15, 19, green
-      );
+     print(
+     `오늘의 기운 · ${current.fortune[2]}`,
+     260,
+     chipTop + 15,
+     19,
+     green
+  );
+
+// 행운의 색에 맞춰 박스·글자·테두리 변경
+const luckyColor = window.getCarbonexLuckyColor(
+  current.fortune[3]
+);
+
+box(
+  458,
+  chipTop,
+  364,
+  52,
+  24,
+  luckyColor.background,
+  luckyColor.border
+);
+
+// 실제 행운의 색을 보여주는 작은 점
+ctx.fillStyle = luckyColor.dot;
+ctx.beginPath();
+ctx.arc(
+  485,
+  chipTop + 26,
+  6,
+  0,
+  Math.PI * 2
+);
+ctx.fill();
+
+print(
+  `행운의 색 · ${current.fortune[3]}`,
+  650,
+  chipTop + 15,
+  19,
+  luckyColor.text
+);
 
       // 行動とアイテムを別々のパネルに
       for (const panel of panels) {
@@ -2286,4 +2319,137 @@ $("#share").onclick = () => {
       console.error("결과 카드 생성 오류:", error);
     }
   };
+})();
+/* 행운의 색과 박스 색상 */
+(() => {
+  const palette = [
+    {
+      name: "햇살 노랑",
+      dot: "#D9AA32",
+      background: "#FFF5D5",
+      text: "#775716",
+      border: "#EAD79D"
+    },
+    {
+      name: "맑은 하늘색",
+      dot: "#70AED5",
+      background: "#EAF5FC",
+      text: "#315F7B",
+      border: "#C5DFEF"
+    },
+    {
+      name: "코랄 핑크",
+      dot: "#D98387",
+      background: "#FCEDEF",
+      text: "#89464F",
+      border: "#EDC8CF"
+    },
+    {
+      name: "차분한 네이비",
+      dot: "#354C70",
+      background: "#EAF0F8",
+      text: "#354C70",
+      border: "#C8D4E5"
+    },
+    {
+      name: "라벤더",
+      dot: "#A28AC8",
+      background: "#F2EDFA",
+      text: "#655080",
+      border: "#DDD0EE"
+    },
+    {
+      name: "민트 초록",
+      dot: "#72AB94",
+      background: "#EAF5EF",
+      text: "#356451",
+      border: "#C6E1D2"
+    },
+    {
+      name: "살구빛",
+      dot: "#DEA073",
+      background: "#FFF0E5",
+      text: "#875635",
+      border: "#EFD1B9"
+    },
+    {
+      name: "포근한 크림색",
+      dot: "#D3C295",
+      background: "#F8F3E5",
+      text: "#71613D",
+      border: "#E5D9B9"
+    },
+    {
+      name: "싱그러운 연두",
+      dot: "#9CB76A",
+      background: "#F0F5E4",
+      text: "#536B32",
+      border: "#D4E1B8"
+    },
+    {
+      name: "로즈 핑크",
+      dot: "#BC7F98",
+      background: "#F8EDF2",
+      text: "#7B465D",
+      border: "#E6CBD7"
+    }
+  ];
+
+  // 저장 카드에서도 같은 색상 정보를 사용
+  window.getCarbonexLuckyColor = (name) =>
+    palette.find(color => color.name === name) || palette[5];
+
+  // 기존 운세의 마지막 항목인 '행운의 색' 변경
+  fortunes.forEach((fortune, index) => {
+    fortune[3] = palette[index % palette.length].name;
+  });
+
+  const colorText = document.querySelector("#color");
+  const colorBox = colorText?.parentElement;
+
+  if (!colorText || !colorBox) return;
+
+  const dot = document.createElement("span");
+  dot.setAttribute("aria-hidden", "true");
+
+  Object.assign(dot.style, {
+    display: "inline-block",
+    width: "11px",
+    height: "11px",
+    borderRadius: "50%",
+    flexShrink: "0"
+  });
+
+  colorBox.prepend(dot);
+
+  function updateLuckyColor() {
+    const color = window.getCarbonexLuckyColor(
+      colorText.textContent.trim()
+    );
+
+    Object.assign(colorBox.style, {
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexWrap: "wrap",
+      gap: "7px",
+      padding: "10px 14px",
+      borderRadius: "16px",
+      boxSizing: "border-box",
+      backgroundColor: color.background,
+      color: color.text,
+      border: `1px solid ${color.border}`
+    });
+
+    colorText.style.color = color.text;
+    dot.style.backgroundColor = color.dot;
+  }
+
+  new MutationObserver(updateLuckyColor).observe(colorText, {
+    childList: true,
+    characterData: true,
+    subtree: true
+  });
+
+  updateLuckyColor();
 })();
